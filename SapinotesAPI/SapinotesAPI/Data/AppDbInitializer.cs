@@ -97,6 +97,80 @@ namespace SapinotesAPI.Data
                     });
                     context.SaveChanges();
                 }
+
+                if (!context.Subjects.Any())
+                {
+                    context.AddRangeAsync(
+                    new Subject()
+                    {
+                        subjectName = "Geometria",
+                        majorID = 1
+                        
+                    },
+                    new Subject()
+                    {
+                        subjectName = "Mesterséges Intelligencia",
+                        majorID = 1
+
+                    },
+                    new Subject()
+                    {
+                        subjectName = "Differenciálegyenletek és parciális differenciálegyenletek",
+                        majorID = 1
+
+                    },
+                    new Subject()
+                    {
+                        subjectName = "Adatbázisok I.",
+                        majorID = 1
+
+                    },
+                    new Subject()
+                    {
+                        subjectName = "Adatbázisok II.",
+                        majorID = 1
+
+                    },
+                    new Subject()
+                    {
+                        subjectName = "Számítógép hálózatok I.",
+                        majorID = 1
+
+                    },
+                    new Subject()
+                    {
+                        subjectName = "Számítógép hálozatok I.",
+                        majorID = 2
+
+                    },
+                    new Subject()
+                    {
+                        subjectName = "Fizika I.",
+                        majorID = 2
+
+                    },
+                    new Subject()
+                    {
+                        subjectName = "Logikai tervezés",
+                        majorID = 2
+
+                    },
+                    new Subject()
+                    {
+                        subjectName = "Digitális elektronika",
+                        majorID = 2
+
+                    },
+                    new Subject()
+                    {
+                        subjectName = "Analóg elektronika I.",
+                        majorID = 2
+
+                    });
+
+                    context.SaveChanges();
+
+                }
             }
         }
     }
