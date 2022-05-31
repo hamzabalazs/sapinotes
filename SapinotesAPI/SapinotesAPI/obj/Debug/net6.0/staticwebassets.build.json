@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "7qVVmZjCFg4edMAvM8baIoBwTgbgq8dPLEOAjM08ZQk=",
+  "Source": "SapinotesAPI",
+  "BasePath": "_content/SapinotesAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
