@@ -39,6 +39,64 @@ namespace SapinotesAPI.Data
                     context.SaveChanges();
 
                 }
+
+                if (!context.Majors.Any())
+                {
+                    context.AddRangeAsync(
+                    new Major()
+                    {
+                        majorName = "Informatika"
+                    },
+                    new Major()
+                    {
+                        majorName = "Számitástechnika"
+                    },
+                    new Major()
+                    {
+                        majorName = "Gépészmérnöki"
+                    },
+                    new Major()
+                    {
+                        majorName = "Mechatronika"
+                    },
+                    new Major()
+                    {
+                        majorName = "Kommunikáció"
+                    },
+                    new Major()
+                    {
+                        majorName = "Fordító és tolmács"
+                    },
+                    new Major()
+                    {
+                        majorName = "Távközlés"
+                    },
+                    new Major()
+                    {
+                        majorName = "Automatizálás"
+                    },
+                    new Major()
+                    {
+                        majorName = "Közegészségügy"
+                    },
+                    new Major()
+                    {
+                        majorName = "Kertészmérnöki"
+                    },
+                    new Major()
+                    {
+                        majorName = "Tájépítészet"
+                    },
+                    new Major()
+                    {
+                        majorName = "Agrármérnöki"
+                    },
+                    new Major()
+                    {
+                        majorName = "Erdőmérnöki"
+                    });
+                    context.SaveChanges();
+                }
             }
         }
     }

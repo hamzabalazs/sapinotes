@@ -7,33 +7,32 @@ using SapinotesAPI.Data.Requests;
 using SapinotesAPI.Data.Responses;
 using SapinotesAPI.Exceptions;
 using SapinotesAPI.Utils;
-
 namespace SapinotesAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class MajorsController : ControllerBase
     {
-        private readonly IUserService _userService;
-        private readonly IUserRepository _userRepository;
+        private readonly IMajorRepository _majorRepository;
+        private readonly IMajorService _majorService;
 
-        public UsersController(IUserService userService, IUserRepository userRepository)
+        public MajorsController(IMajorService majorService, IMajorRepository majorRepository)
         {
-            _userService = userService;
-            _userRepository = userRepository;
+            _majorRepository = majorRepository;
+            _majorService = majorService;
         }
 
-        [HttpPost, Route("add-new-user")]
-        public async Task<ActionResult<User>> PostUser([FromBody] UserRequest user)
+        [HttpPost, Route("add-new-major")]
+        public async Task<ActionResult<Major>> PostMajor([FromBody] MajorRequest major)
         {
             try
             {
-                UserResponse result = await _userService.AddNewUser(user);
+                MajorResponse result = await _majorService.AddNewMajor(major);
                 return Ok(result);
             }
             catch (AddException ex)
             {
-                UserResponse errorResponse = new UserResponse()
+                MajorResponse errorResponse = new MajorResponse()
                 {
                     Code = 400,
                     Message = APIErrorCodes.ADD_REQUEST_EXCEPTION_MESSAGE + ex.Message
@@ -41,13 +40,12 @@ namespace SapinotesAPI.Controllers
                 return BadRequest(errorResponse);
             }
         }
-
-        [HttpGet, Route("get-user-by-userId")]
-        public async Task<ActionResult<User>> GetUserById(int userId)
+        [HttpGet, Route("get-major-by-majorId")]
+        public async Task<ActionResult<Major>> GetMajorById(int majorId)
         {
             try
             {
-                var result = await _userRepository.GetUserById(userId);
+                var result = await _majorRepository.GetMajorById(majorId);
 
                 if (result == null)
                 {
@@ -61,28 +59,30 @@ namespace SapinotesAPI.Controllers
             }
         }
 
-        [HttpDelete, Route("delete-user-by-id")]
-        public async Task<ActionResult> DeleteUser(int id)
+        [HttpDelete, Route("delete-major-by-id")]
+        public async Task<ActionResult> DeleteMajor(int id)
         {
             try
             {
-                var userToDelete = await _userRepository.GetUserById(id);
+                var majorToDelete = await _majorRepository.GetMajorById(id);
 
-                if (userToDelete == null)
+                if (majorToDelete == null)
                 {
                     return NotFound();
                 }
 
-                await _userRepository.DeleteUserById(id);
+                await _majorRepository.DeleteMajorById(id);
                 return Ok();
 
 
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting user");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting major");
             }
 
         }
+
+
     }
 }
