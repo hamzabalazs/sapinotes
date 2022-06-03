@@ -42,5 +42,17 @@ namespace SapinotesAPI.Repositories
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.userID == userId);
         }
+
+        public async Task<User> LoginUser(string userEmail,string userPassword)
+        {
+            try
+            {
+                return await _context.Users.Where(u => u.email == userEmail && u.password == userPassword).FirstOrDefaultAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new GetRequestException(ex.Message);
+            }
+        }
     }
 }
