@@ -84,5 +84,25 @@ namespace SapinotesAPI.Controllers
             }
 
         }
+
+        [HttpPost, Route("login")]
+        public async Task<ActionResult<User>> PostUserForLogin(string email, string password)
+        {
+            try
+            {
+                var result = await _userRepository.LoginUser(email,password);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                
+                return result;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from database");
+            }
+        }
     }
 }
