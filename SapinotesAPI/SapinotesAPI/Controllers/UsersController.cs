@@ -84,6 +84,26 @@ namespace SapinotesAPI.Controllers
             }
 
         }
+        [HttpPut, Route("update-user")]
+        public async Task<ActionResult> UpdateUser(int id,string email,string password,string username)
+        {
+            try
+            {
+                var userToUpdate = await _userRepository.GetUserById(id);
+
+                if (userToUpdate == null)
+                {
+                    return NotFound();
+                }
+
+                await _userRepository.UpdateUser(id,email,password,username);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error updating user");
+            }
+        }
 
         [HttpPost, Route("login")]
         public async Task<ActionResult<User>> PostUserForLogin(string email, string password)

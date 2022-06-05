@@ -38,6 +38,18 @@ namespace SapinotesAPI.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+        public async Task UpdateUser(int userId,string userEmail, string userPassword, string username)
+        {
+            var result = await _context.Users.FirstOrDefaultAsync(u => u.userID == userId);
+
+            if(result != null)
+            {
+                result.email = userEmail;
+                result.username = username;
+                result.password = userPassword;
+                await _context.SaveChangesAsync();
+            }
+        }
         public async Task<User> GetUserById(int userId)
         {
             return await _context.Users.FirstOrDefaultAsync(u => u.userID == userId);

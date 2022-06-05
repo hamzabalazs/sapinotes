@@ -16,6 +16,7 @@ function App(){
   return(
     <div>
       <Header/>
+      <div className='bodydiv-with-nav'></div>
     </div>
   );
 }
