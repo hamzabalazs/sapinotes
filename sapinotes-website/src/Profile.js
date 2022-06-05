@@ -3,34 +3,40 @@ import { useNavigate } from "react-router-dom";
 import Header from './Header'
 import validator from 'validator'
 
+
+
+
+
 async function UpdateUser(userID,email,password,username) {
     let url = "https://localhost:7214/api/Users/update-user?id=" + userID + "&email=" + email + "&password=" + password + "&username=" + username;
-    let item = {userID,username,email,password}
     return fetch(url, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(item)
-      
+
     })
-      .then(data => data.json())
+      
    }
 
 function Profile(){
     const [username,setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+
+    let userID = 0;
+
+    if(localStorage.getItem('user-info')){
+      const currentUser = JSON.parse(localStorage.getItem('user-info'));
+      userID = currentUser.userID.toString();
+    }
     
-    const currentUser = JSON.parse(localStorage.getItem('user-info'));
-    const id = currentUser.userID.toString();
-    console.log(id)
-    console.log(typeof id)
+   
     const navigate = useNavigate();
     useEffect(() => {
-        if(!localStorage.getItem('user-info')){
-            navigate('/login');
-        }
+      if(!localStorage.getItem('user-info')){
+        navigate('/login');
+      }
       })
 
     
@@ -41,9 +47,10 @@ function Profile(){
         if(validator.isEmail(email)){
             if(password.length > 7){
                 if(username.length > 3){
-                    await UpdateUser(id,username,email,password);
-                    let item = {id,username,email,password} 
+                    await UpdateUser(userID,email,password,username);
+                    let item = {userID,username,email,password} 
                     localStorage.setItem('user-info',JSON.stringify(item))
+                    navigate('/');
                 }
                 else alert("Username has to be more than 3 characters in length!");
             }
