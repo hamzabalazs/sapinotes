@@ -27,7 +27,7 @@ function Register(){
     if(localStorage.getItem('user-info')){
         navigate('/');
     }
-})
+  })
   
 
   const Submit = async e => {

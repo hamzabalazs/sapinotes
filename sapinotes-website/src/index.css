@@ -8,4 +8,10 @@
 
 }
 
+.navbar-css a{
+    padding-left:30px;
+}
 
+.color-nav{
+    background-color: green;
+}
