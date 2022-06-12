@@ -1,0 +1,24 @@
+controller->service->repo
+
+User: get post delete ( done )
+	- userID ( automatic )
+	- username
+	- email
+	- password
+Major: get post delete ( done )
+	- majorID ( automatic )
+	- majorName
+Subject: get post delete
+	- subjectID ( automatic )
+	- subjectName
+	- majorID
+Note: get post delete
+	- noteID ( automatic )
+	- subjectID
+	- userID
+	- noteName
+	- noteFilePath
+
+add-migration "nev"
+update-database
+
