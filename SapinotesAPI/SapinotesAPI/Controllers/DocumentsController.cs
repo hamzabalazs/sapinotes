@@ -19,35 +19,33 @@ namespace SapinotesAPI.Controllers
         }
 
         [HttpPost,Route("upload")]
-        public async Task<ActionResult> Upload(List<IFormFile> files)
+        public async Task<ActionResult> Upload(IFormFile file)
         {
-            long size = files.Sum(f => f.Length);
+            
 
             var rootPath = Path.Combine(_enviroment.ContentRootPath, "Documents");
 
             if (!Directory.Exists(rootPath))
                 Directory.CreateDirectory(rootPath);
 
-            foreach(var file in files)
+            var filePath = Path.Combine(rootPath, file.FileName);
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
             {
-                var filePath = Path.Combine(rootPath, file.FileName);
-                
-                using(var stream = new FileStream(filePath, FileMode.Create))
+                var document = new Document
                 {
-                    var document = new Document
-                    {
-                        documentName = file.FileName,
-                        ContentType = file.ContentType,
-                        documentSize = file.Length
-                    };
+                    documentName = file.FileName,
+                    ContentType = file.ContentType,
+                    documentSize = file.Length
+                };
 
-                    await file.CopyToAsync(stream);
+                await file.CopyToAsync(stream);
 
-                    _context.Documents.Add(document);
-                    await _context.SaveChangesAsync();
-                }
+                _context.Documents.Add(document);
+                await _context.SaveChangesAsync();
+                return Ok(document);
             }
-            return Ok(new { count = files.Count, size });
+            
         }
         
         [HttpPost,Route("download-by-id")]
