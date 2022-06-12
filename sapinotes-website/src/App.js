@@ -1,26 +1,19 @@
-import React, { useEffect } from 'react';
-import Header from './Header'
-import {useNavigate} from 'react-router-dom'
+import React, { useEffect } from "react";
+import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 
-
-
-function App(){
-
+function App() {
   const navigate = useNavigate();
   useEffect(() => {
-  if(!localStorage.getItem('user-info')){
-      navigate('/login');
-  }
-  })
+    if (!localStorage.getItem("user-info")) {
+      navigate("/login");
+    }
+  });
 
-  
-
-  return(
+  return (
     <div>
-      <Header/>
-      <div className='bodydiv-with-nav'>
-      
-      </div>
+      <Header />
+      <div className="bodydiv-with-nav"></div>
     </div>
   );
 }

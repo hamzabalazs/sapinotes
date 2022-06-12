@@ -20,7 +20,7 @@ namespace SapinotesAPI.Controllers
         }
 
         [HttpPost,Route("upload")]
-        public async Task<ActionResult> Upload(IFormFile file)
+        public async Task<ActionResult> Upload([FromForm]IFormFile pdfFile)
         {
             
 
@@ -29,18 +29,18 @@ namespace SapinotesAPI.Controllers
             if (!Directory.Exists(rootPath))
                 Directory.CreateDirectory(rootPath);
 
-            var filePath = Path.Combine(rootPath, file.FileName);
+            var filePath = Path.Combine(rootPath, pdfFile.FileName);
 
             using (var stream = new FileStream(filePath, FileMode.Create))
             {
                 var document = new Document
                 {
-                    documentName = file.FileName,
-                    ContentType = file.ContentType,
-                    documentSize = file.Length
+                    documentName = pdfFile.FileName,
+                    ContentType = pdfFile.ContentType,
+                    documentSize = pdfFile.Length
                 };
 
-                await file.CopyToAsync(stream);
+                await pdfFile.CopyToAsync(stream);
 
                 _context.Documents.Add(document);
                 await _context.SaveChangesAsync();
