@@ -7,6 +7,9 @@ using SapinotesAPI.Data.Requests;
 using SapinotesAPI.Data.Responses;
 using SapinotesAPI.Exceptions;
 using SapinotesAPI.Utils;
+using SapinotesAPI.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace SapinotesAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -15,11 +18,13 @@ namespace SapinotesAPI.Controllers
     {
         private readonly IMajorRepository _majorRepository;
         private readonly IMajorService _majorService;
+        private readonly AppDbContext _context;
 
-        public MajorsController(IMajorService majorService, IMajorRepository majorRepository)
+        public MajorsController(IMajorService majorService, IMajorRepository majorRepository,AppDbContext context )
         {
             _majorRepository = majorRepository;
             _majorService = majorService;
+            _context = context;
         }
 
         [HttpPost, Route("add-new-major")]
@@ -81,6 +86,12 @@ namespace SapinotesAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting major");
             }
 
+        }
+
+        [HttpGet,Route("getmajors")]
+        public async Task<IEnumerable<Major>> GetAllMajors()
+        {
+            return await _context.Majors.ToListAsync();
         }
 
 

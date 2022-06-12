@@ -19,6 +19,7 @@ function Header()
                 <Nav className="me-auto">
                     <Nav.Link href="/profile">My Profile</Nav.Link>
                     <Nav.Link href="/notes">My Notes</Nav.Link>
+                    <Nav.Link href="/addnote">Add A Note</Nav.Link>
                     
                 </Nav>
                 <Button variant="secondary" onClick={handleLogoutClick}>Logout</Button>

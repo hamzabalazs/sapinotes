@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.EntityFrameworkCore;
 using SapinotesAPI.Data;
 using SapinotesAPI.Data.Models;
 
@@ -77,6 +78,24 @@ namespace SapinotesAPI.Controllers
             }
 
             return File(fileBytes, contentType, document.documentName);
+        }
+        [HttpGet,Route("get-doc")]
+        public async Task<ActionResult<Document>> GetDocument(int id)
+        {
+            try
+            {
+                var result = await _context.Documents.FirstOrDefaultAsync(d => d.documentID == id);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return result;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
+            }
         }
         
     }
