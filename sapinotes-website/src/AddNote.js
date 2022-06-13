@@ -95,7 +95,7 @@ function AddNote() {
       const response = await PostNote(userID, subjectID, noteName, noteDocID);
       if (response.code === 200) {
         console.log("sikeres feltöltés");
-        console.log(response);
+        alert("sikeres feltöltés");
       } else console.log("sikertelen feltöltés");
     } else console.log("undefined hiba");
   };
@@ -104,7 +104,7 @@ function AddNote() {
     <div>
       <Header />
       <div className="bodydiv-with-nav">
-        <h1>Add a new note</h1>
+        <h2>Add a new note</h2>
         <div className="col-sm-6 offset-sm-3">
           <label>Major</label>
           <Select

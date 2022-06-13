@@ -97,6 +97,33 @@ namespace SapinotesAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
             }
         }
-        
+
+        [HttpDelete, Route("delete-doc-by-id")]
+        public async Task<ActionResult> DeleteDocument(int id)
+        {
+            try
+            {
+                var docToDelete = await _context.Documents.FirstOrDefaultAsync(d => d.documentID == id);
+
+                if (docToDelete != null)
+                {
+                    _context.Documents.Remove(docToDelete);
+                    await _context.SaveChangesAsync();
+                    return Ok();
+
+                }
+
+                return NotFound();
+                
+
+
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting document");
+            }
+
+        }
+
     }
 }

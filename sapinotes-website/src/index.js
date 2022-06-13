@@ -6,6 +6,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Profile from "./Profile";
 import AddNote from "./AddNote";
+import Notes from "./Notes";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
@@ -19,6 +20,7 @@ root.render(
       <Route path="register" element={<Register />} />
       <Route path="profile" element={<Profile />} />
       <Route path="addnote" element={<AddNote />} />
+      <Route path="notes" element={<Notes />} />
     </Routes>
   </BrowserRouter>
 );

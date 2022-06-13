@@ -25,3 +25,8 @@
 .color-nav {
   background-color: green;
 }
+
+.notelistdiv {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+}

@@ -58,6 +58,7 @@ function Profile() {
     <div>
       <Header />
       <div className="bodydiv-with-nav">
+        <h2>Update your profile</h2>
         <div className="col-sm-6 offset-sm-3">
           <label>Username</label>
           <input
