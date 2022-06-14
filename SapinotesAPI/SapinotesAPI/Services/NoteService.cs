@@ -22,6 +22,7 @@ namespace SapinotesAPI.Services
             Note note = new Note()
             {
                 userID = newNote.userID,
+                username = newNote.username,
                 subjectID = newNote.subjectID,
                 noteName = newNote.noteName,
                 noteDocID = newNote.noteDocID

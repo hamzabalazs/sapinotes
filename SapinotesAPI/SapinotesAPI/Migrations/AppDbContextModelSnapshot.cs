@@ -85,6 +85,10 @@ namespace SapinotesAPI.Migrations
                     b.Property<int>("userID")
                         .HasColumnType("int");
 
+                    b.Property<string>("username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("noteID");
 
                     b.ToTable("Notes");

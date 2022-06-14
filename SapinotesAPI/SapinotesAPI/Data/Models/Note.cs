@@ -11,6 +11,8 @@ namespace SapinotesAPI.Data.Models
         [Required]
         public int userID { get; set; }
         [Required]
+        public string username { get; set; }
+        [Required]
         public int subjectID { get; set; }
         [Required]
         public string noteName { get; set; }

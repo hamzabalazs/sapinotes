@@ -9,5 +9,7 @@ namespace SapinotesAPI.Repositories
         public Task<IEnumerable<Note>> GetAllNotesOfSubject(int subjectId);
         public Task DeleteNoteById(int noteId);
         public Task<Note> GetNoteById(int noteId);
+
+        
     }
 }
