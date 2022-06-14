@@ -4,33 +4,6 @@ import NoteList from "./NoteList";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 
-async function downloadfile(documentID, documentName) {
-  let urlDownload =
-    "https://localhost:7214/api/Documents/download-by-id?id=" + documentID;
-
-  fetch(urlDownload, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then(resp => resp.blob())
-    .then(blob => {
-      const url = window.URL.createObjectURL(blob);
-      console.log(blob);
-
-      const a = document.createElement("a");
-      a.style.display = "none";
-      a.href = url;
-      // the filename you want
-      a.download = documentName;
-      document.body.appendChild(a);
-      a.click();
-      window.URL.revokeObjectURL(url);
-    })
-    .catch(() => alert("oh no!"));
-}
-
 function App() {
   const [majorList, setMajorList] = useState([]);
   const [subjectList, setSubjectList] = useState([]);
@@ -89,8 +62,6 @@ function App() {
     console.log(noteList);
   };
 
-  const downloadNote = () => {};
-
   const navigate = useNavigate();
   useEffect(() => {
     getMajorList();
@@ -134,7 +105,7 @@ function App() {
           </button>
         </div>
         <div className="container-fluid notelistdiv">
-          <NoteList noteList={noteList} handleDownloadNote={downloadNote} />
+          <NoteList noteList={noteList} />
         </div>
       </div>
     </div>

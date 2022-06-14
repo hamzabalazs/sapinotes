@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import axios from "axios";
 
-async function PostNote(userID, subjectID, noteName, noteDocID) {
+async function PostNote(userID, username, subjectID, noteName, noteDocID) {
   let url = "https://localhost:7214/api/Notes/add-new-note";
-  let item = { userID, subjectID, noteName, noteDocID };
+  let item = { userID, username, subjectID, noteName, noteDocID };
   return fetch(url, {
     method: "POST",
     headers: {
@@ -83,6 +83,7 @@ function AddNote() {
     e.preventDefault();
     let user = JSON.parse(localStorage.getItem("user-info"));
     const userID = user.userID;
+    const username = user.username;
     const subjectID = subject.subjectID;
     const noteDocID = await uploadDoc(pdfFile);
     console.log(noteDocID);
@@ -90,9 +91,16 @@ function AddNote() {
       noteDocID !== 0 ||
       subjectID !== undefined ||
       userID !== undefined ||
-      noteName !== undefined
+      noteName !== undefined ||
+      username !== undefined
     ) {
-      const response = await PostNote(userID, subjectID, noteName, noteDocID);
+      const response = await PostNote(
+        userID,
+        username,
+        subjectID,
+        noteName,
+        noteDocID
+      );
       if (response.code === 200) {
         console.log("sikeres feltöltés");
         alert("sikeres feltöltés");
