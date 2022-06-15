@@ -14,5 +14,7 @@ namespace SapinotesAPI.Data
         public DbSet<Subject> Subjects { get; set; }
         public DbSet<Note> Notes { get; set; }
         public DbSet<Document> Documents { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
+
     }
 }

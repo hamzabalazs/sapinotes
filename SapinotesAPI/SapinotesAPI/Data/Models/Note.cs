@@ -18,5 +18,9 @@ namespace SapinotesAPI.Data.Models
         public string noteName { get; set; }
         [Required]
         public int noteDocID { get; set; }
+        [Required]
+        public double noteRatingValue { get; set; }
+        [Required]
+        public int numberOfRatings { get; set; }
     }
 }

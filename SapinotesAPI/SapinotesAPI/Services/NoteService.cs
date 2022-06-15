@@ -25,7 +25,9 @@ namespace SapinotesAPI.Services
                 username = newNote.username,
                 subjectID = newNote.subjectID,
                 noteName = newNote.noteName,
-                noteDocID = newNote.noteDocID
+                noteDocID = newNote.noteDocID,
+                noteRatingValue = newNote.noteRatingValue,
+                numberOfRatings = newNote.numberOfRatings
             };
 
             NoteResponse response = new NoteResponse();

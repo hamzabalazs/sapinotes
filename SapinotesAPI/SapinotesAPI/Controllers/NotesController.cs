@@ -73,9 +73,9 @@ namespace SapinotesAPI.Controllers
         {
             try
             {
-                var userToDelete = await _noteRepository.GetNoteById(id);
+                var noteToDelete = await _noteRepository.GetNoteById(id);
 
-                if (userToDelete == null)
+                if (noteToDelete == null)
                 {
                     return NotFound();
                 }
@@ -90,6 +90,26 @@ namespace SapinotesAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting note");
             }
 
+        }
+        [HttpPut, Route("update-rating-of-note")]
+        public async Task<ActionResult> UpdateNote(int id, int ratingValue)
+        {
+            try
+            {
+                var noteToUpdate = await _noteRepository.GetNoteById(id);
+
+                if (noteToUpdate == null)
+                {
+                    return NotFound();
+                }
+
+                await _noteRepository.UpdateRatingOfNote(id, ratingValue);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error updating rating");
+            }
         }
     }
 }

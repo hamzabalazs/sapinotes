@@ -66,5 +66,33 @@ namespace SapinotesAPI.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task UpdateRatingOfNote(int noteId, int ratingValue)
+        {
+            var result = await _context.Notes.FirstOrDefaultAsync(n => n.noteID == noteId);
+
+            if (result != null)
+            {
+                var numberOfRatings = result.numberOfRatings;
+                if (numberOfRatings == 0)
+                {
+                    result.noteRatingValue = ratingValue;
+                    numberOfRatings += 1;
+                    result.numberOfRatings = numberOfRatings;
+                }
+                else
+                {
+                    var newRatingValue = result.noteRatingValue;
+                    newRatingValue = newRatingValue * numberOfRatings;
+                    newRatingValue = newRatingValue + ratingValue;
+                    numberOfRatings += 1;
+                    newRatingValue = newRatingValue / numberOfRatings;
+                    result.noteRatingValue = newRatingValue;
+                    result.numberOfRatings = numberOfRatings;
+                    
+                }
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

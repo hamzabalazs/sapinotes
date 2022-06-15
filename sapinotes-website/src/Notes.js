@@ -30,9 +30,7 @@ function Notes() {
       <Header />
       <div className="bodydiv-with-nav">
         <h2>Your Notes</h2>
-        <div className="container-fluid notelistdiv">
-          <OwnNoteList noteList={noteList} />
-        </div>
+        <OwnNoteList noteList={noteList} />
       </div>
     </div>
   );

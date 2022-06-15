@@ -10,6 +10,8 @@ namespace SapinotesAPI.Repositories
         public Task DeleteNoteById(int noteId);
         public Task<Note> GetNoteById(int noteId);
 
-        
+        public Task UpdateRatingOfNote(int noteID,int ratingValue);
+
+
     }
 }
