@@ -114,6 +114,9 @@ namespace SapinotesAPI.Migrations
                     b.Property<int>("ratingValue")
                         .HasColumnType("int");
 
+                    b.Property<int>("userID")
+                        .HasColumnType("int");
+
                     b.HasKey("ratingID");
 
                     b.ToTable("Ratings");

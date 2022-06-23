@@ -79,5 +79,19 @@ namespace SapinotesAPI.Controllers
             }
 
         }
+
+        [HttpGet, Route("get-ratings-of-user-for-note")]
+        public async Task<ActionResult> GetRatingsByUserAndNote(int userId,int noteId)
+        {
+            try
+            {
+                return Ok(await _ratingRepository.GetRatingsOfUserForNote(userId,noteId));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
     }
 }

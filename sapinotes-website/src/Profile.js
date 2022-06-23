@@ -27,18 +27,22 @@ function Profile() {
   const [password, setPassword] = useState();
 
   let userID = 0;
-
-  if (localStorage.getItem("user-info")) {
-    const currentUser = JSON.parse(localStorage.getItem("user-info"));
-    userID = currentUser.userID.toString();
-  }
+  userID = JSON.parse(localStorage.getItem("user-info")).userID.toString();
 
   const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("user-info")) {
       navigate("/login");
     }
-  });
+    if (localStorage.getItem("user-info")) {
+      const currentUser = JSON.parse(localStorage.getItem("user-info"));
+
+      let currUsername = currentUser.username.toString();
+      let currEmail = currentUser.email.toString();
+      setUsername(currUsername);
+      setEmail(currEmail);
+    }
+  }, []);
 
   const Update = async e => {
     e.preventDefault();
@@ -63,7 +67,7 @@ function Profile() {
           <label>Username</label>
           <input
             type="text"
-            placeholder="username"
+            placeholder={username}
             onChange={e => setUsername(e.target.value)}
             className="form-control"
           />
@@ -71,7 +75,7 @@ function Profile() {
           <label>Email Address</label>
           <input
             type="text"
-            placeholder="email"
+            placeholder={email}
             onChange={e => setEmail(e.target.value)}
             className="form-control"
           />

@@ -21,6 +21,7 @@ namespace SapinotesAPI.Services
             {
                 
                 noteID = newRating.noteID,
+                userID = newRating.userID,
                 ratingValue = newRating.ratingValue,
                 
             };

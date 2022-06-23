@@ -55,5 +55,17 @@ namespace SapinotesAPI.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+
+        public async Task<IEnumerable<Rating>> GetRatingsOfUserForNote(int userId,int noteId)
+        {
+            try
+            {
+                return await _context.Ratings.Where(r => r.noteID == noteId && r.userID == userId).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new GetRequestException(ex.Message);
+            }
+        }
     }
 }

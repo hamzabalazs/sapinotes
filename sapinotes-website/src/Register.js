@@ -26,6 +26,11 @@ function Register() {
     }
   });
 
+  const GoToLogin = async e => {
+    e.preventDefault();
+    navigate("/login");
+  };
+
   const Submit = async e => {
     e.preventDefault();
     if (validator.isEmail(email)) {
@@ -67,6 +72,8 @@ function Register() {
           onChange={e => setPassword(e.target.value)}
           className="form-control"
         />
+        <br />
+        <p onClick={GoToLogin}>Already have an account? Click here to login</p>
         <br />
         <button onClick={Submit} className="btn btn-primary">
           Login

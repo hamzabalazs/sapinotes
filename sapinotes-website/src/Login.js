@@ -26,6 +26,11 @@ function Login() {
     }
   });
 
+  const GoToRegister = async e => {
+    e.preventDefault();
+    navigate("/register");
+  };
+
   const Submit = async e => {
     e.preventDefault();
     const response = await loginUser(email, password);
@@ -55,6 +60,7 @@ function Login() {
           className="form-control"
         />
         <br />
+        <p onClick={GoToRegister}>Don't have an account? Register now!</p>
         <button onClick={Submit} className="btn btn-primary">
           Login
         </button>
