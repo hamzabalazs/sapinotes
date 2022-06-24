@@ -67,6 +67,33 @@ namespace SapinotesAPI.Controllers
                     "Error retrieving data from the database");
             }
         }
+        [HttpGet, Route("get-notes-of-subject-ordered-by-rating")]
+        public async Task<ActionResult> GetNotesBySubjectOrderedByRating(int subjectId)
+        {
+            try
+            {
+                return Ok(await _noteRepository.GetAllNotesOfSubjectOrderedByRating(subjectId));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
+
+        [HttpGet, Route("get-new-notes-of-subject")]
+        public async Task<ActionResult> GetNewNotesBySubject(int subjectId)
+        {
+            try
+            {
+                return Ok(await _noteRepository.GetAllNewNotesOfSubject(subjectId));
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error retrieving data from the database");
+            }
+        }
 
         [HttpDelete, Route("delete-note-by-id")]
         public async Task<ActionResult> DeleteNote(int id)

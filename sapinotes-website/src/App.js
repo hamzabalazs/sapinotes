@@ -31,6 +31,28 @@ function App() {
       });
   };
 
+  const getOrderedNoteList = async subjectId => {
+    let url =
+      "https://localhost:7214/api/Notes/get-notes-of-subject-ordered-by-rating?subjectId=" +
+      subjectId;
+    fetch(url)
+      .then(response => response.json())
+      .then(output => {
+        setNoteList([...noteList, ...output]);
+      });
+  };
+
+  const getNewNoteList = async subjectId => {
+    let url =
+      "https://localhost:7214/api/Notes/get-new-notes-of-subject?subjectId=" +
+      subjectId;
+    fetch(url)
+      .then(response => response.json())
+      .then(output => {
+        setNoteList([...noteList, ...output]);
+      });
+  };
+
   const getSubjectList = async majorId => {
     let url =
       "https://localhost:7214/api/Subjects/get-subjects-of-major?majorId=" +
@@ -38,7 +60,7 @@ function App() {
     fetch(url)
       .then(response => response.json())
       .then(output => {
-        setSubjectList([...subjectList, ...output]);
+        setSubjectList([subjectList, ...output]);
       });
   };
 
@@ -54,11 +76,33 @@ function App() {
     setSubjectList([]);
   };
 
+  const emptyNoteList = () => {
+    console.log(noteList);
+    setNoteList(noteList, []);
+    console.log(noteList);
+  };
+
   const fillNoteList = () => {
     if (subject !== undefined) {
       let id = subject.subjectID;
       getNoteList(id);
     } else getNoteList(0);
+    console.log(noteList);
+  };
+
+  const fillOrderedNoteList = () => {
+    if (subject !== undefined) {
+      let id = subject.subjectID;
+      getOrderedNoteList(id);
+    } else getOrderedNoteList(0);
+    console.log(noteList);
+  };
+
+  const fillNewNoteList = () => {
+    if (subject !== undefined) {
+      let id = subject.subjectID;
+      getNewNoteList(id);
+    } else getNewNoteList(0);
     console.log(noteList);
   };
 
@@ -100,8 +144,14 @@ function App() {
             getOptionValue={option => option.subjectID}
           />
           <br />
-          <button onClick={fillNoteList} className="btn btn-primary">
+          <button onClick={fillNoteList} className="listbutton">
             List Notes
+          </button>
+          <button onClick={fillOrderedNoteList} className="listbutton">
+            Order By Rating
+          </button>
+          <button onClick={fillNewNoteList} className="listbutton">
+            List New Notes Only
           </button>
         </div>
         <div className="container-fluid notelistdiv">

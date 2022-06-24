@@ -52,3 +52,9 @@
 #rate {
   margin-bottom: 10px;
 }
+
+.listbutton {
+  margin-left: 10px;
+  background-color: green;
+  color: white;
+}

@@ -51,6 +51,30 @@ namespace SapinotesAPI.Repositories
             }
         }
 
+        public async Task<IEnumerable<Note>> GetAllNotesOfSubjectOrderedByRating(int subjectId)
+        {
+            try
+            {
+                return await _context.Notes.Where(n => n.subjectID == subjectId).OrderByDescending(n => n.noteRatingValue).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new GetRequestException(ex.Message);
+            }
+        }
+
+        public async Task<IEnumerable<Note>> GetAllNewNotesOfSubject(int subjectId)
+        {
+            try
+            {
+                return await _context.Notes.Where(n => n.subjectID == subjectId && n.numberOfRatings == 0).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new GetRequestException(ex.Message);
+            }
+        }
+
         public async Task<Note> GetNoteById(int noteId)
         {
             return await _context.Notes.FirstOrDefaultAsync(n => n.noteID == noteId);
