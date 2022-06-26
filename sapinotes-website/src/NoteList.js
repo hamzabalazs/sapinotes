@@ -122,10 +122,8 @@ const NoteList = props => {
         noteId,
         ratingValue.value
       );
-      console.log(addRatingResponse.code);
+
       const updateResponse = await updateNoteRating(noteId, ratingValue.value);
-      console.log("hhhe");
-      console.log(updateResponse);
     }
   };
 
