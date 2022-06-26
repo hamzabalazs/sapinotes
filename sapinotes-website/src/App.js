@@ -27,7 +27,7 @@ function App() {
     fetch(url)
       .then(response => response.json())
       .then(output => {
-        setNoteList([...noteList, ...output]);
+        setNoteList(output);
       });
   };
 
@@ -38,7 +38,7 @@ function App() {
     fetch(url)
       .then(response => response.json())
       .then(output => {
-        setNoteList([...noteList, ...output]);
+        setNoteList(output);
       });
   };
 
@@ -49,7 +49,7 @@ function App() {
     fetch(url)
       .then(response => response.json())
       .then(output => {
-        setNoteList([...noteList, ...output]);
+        setNoteList(output);
       });
   };
 
