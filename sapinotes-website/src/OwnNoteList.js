@@ -49,22 +49,20 @@ function downloadfile(documentId, documentName) {
       a.click();
       window.URL.revokeObjectURL(url);
     })
-    .catch(() => alert("oh no!"));
+    .catch(() => alert("An error occured while downloading file!"));
 }
 
 const OwnNoteList = props => {
   const Download = async documentId => {
-    console.log("hll");
     const response = await getDoc(documentId);
     console.log(response);
     downloadfile(documentId, response.documentName);
   };
 
   const Delete = async (documentId, noteId) => {
-    console.log("torleskezdet");
     const response = await deleteDoc(documentId);
     if (response !== null) {
-      console.log("sikeres");
+      alert("Note deletion successful!");
       await deleteNote(noteId);
     }
   };
