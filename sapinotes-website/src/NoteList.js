@@ -95,7 +95,9 @@ const NoteList = props => {
   const user = JSON.parse(localStorage.getItem("user-info"));
 
   useEffect(() => {
-    setUserId(user.userID);
+    if (user.userID) {
+      setUserId(user.userID);
+    }
 
     /*return () => {
       if (localStorage.getItem("user-info"))

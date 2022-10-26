@@ -76,7 +76,7 @@ function Register() {
         <p onClick={GoToLogin}>Already have an account? Click here to login</p>
         <br />
         <button onClick={Submit} className="btn btn-primary">
-          Login
+          Register
         </button>
       </div>
     </div>
